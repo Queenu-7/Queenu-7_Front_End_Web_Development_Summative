@@ -1,0 +1,66 @@
+[
+    {
+        "id": "task_1727625600000_abc123def",
+        "title": "Study for Math Final Exam",
+        "dueDate": "2025-10-15",
+        "duration": 180,
+        "tag": "Academic",
+        "createdAt": "2025-09-29T10:30:00.000Z",
+        "updatedAt": "2025-09-29T10:30:00.000Z"
+    },
+    {
+        "id": "task_task_1727625600001_ghi456jkl",
+        "title": "Group project Meeting with Team",
+        "dueDate": "2025-10-12",
+        "duration": 60,
+        "tag":"Academic",
+        "createdAt": "2025-09-28T14:20:00.000Z",
+        "updatedAt": "2025-09-28T14:20:00.000Z"
+    },
+
+    {
+        "id": "task_727625600002_mno789pqr",
+        "title": "Football Game",
+        "dueDate": "2025-10-08",
+        "duration": 240,
+        "tag": "social",
+        "createdAt": "2025-09-27T09:15:00.000Z",
+        "updatedAt": "2025-09-27T09:15:00.000Z"
+    },
+    {
+        "id": "task_727625600003_stu012vwx",
+        "title": "Library study",
+        "dueDate": "2025-10-12",
+        "duration": 120,
+        "tag": "Academic",
+        "createdAt": "2025-09-26T16:45:00.000Z",
+        "updatedAt": "2025-09-26T16:45:00.000Z"
+    },
+    {
+        "id": "task_727625600004_yz345678",
+        "title": "PLP weekly meeting",
+        "dueDate": "2025-10-05",
+        "duration": 90,
+        "tag": "Extracurricular",
+        "createdAt":"2025-09-25T11:20:00.000Z",
+        "updatedAt":"2025-09-25T11:20:00.000Z"
+    },
+    {
+        "id": "task_72762560005_9012abcd",
+        "title": "Physics lab report",
+        "dueDate": "2025-10-10",
+        "duration": 150,
+        "tag": "Academic",
+        "createdAt":"2025-09-24T13:10:00.000Z",
+        "updatedAt":"2025-09-24T13:10:00.000Z"
+    },
+    {
+        "id": "task_72762560006_efgh5678",
+        "title":"Dinner Outing with friends",
+        "dueDate":"2025-10-06",
+        "duration": 120,
+        "tag": "social",
+        "createdAt": "2025-09-23T09:30:00.000Z",
+        "updatedAt":"2025-09-23T09:30:00.000Z"
+    }
+]
