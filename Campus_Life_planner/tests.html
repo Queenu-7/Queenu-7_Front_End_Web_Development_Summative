@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* General styling for the body and test results */
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        .test {border: 1px solid #ccc; padding: 1rem; margin: 0.5rem 0; }
+        .pass {border-color: green; background: #f0fff0; }
+        .fail { border-color: red; background: #fff0ff; }
+        .test-title { font-weight: bold; margin-bottom: 0.5rem; }
+        .test-result { margin: 0.25rem 0; }
+    </style>
+
+</head>
+<body>
+    <h1>Regex validation Tests</h1>
+    <div id="test-results"></div> <!---This is where tests outputs will appear-->
+
+    <script type="module">
+        //Importing validation and search function
+        import { validators, validateForm } from './java_scripts/validators.js';
+        import { safeRegexCompile, highlightMatches } from './java_scripts/search.js';
+
+        //Test cases for different validation types
+
+        const tests = [
+            //Title validation
+            { type: 'title', value: 'valid Title', expected: null },
+            { type: 'title', value: ' Invalid', expected: "Title cant have leading or trailing spaces" },
+            { type: 'title', value: 'Dupliacte duplicate words', expected: "Title contains duplicate words" },
+            { type: 'title', value: 'A', expected: "Title must be atleast 2 characters long" },
+            { type: 'title', value: 'Multiple spaces', expected: "Title cant have multiple consecutive spaces" },
+
+            //Duration validation
+            { type: 'duration', value: '60', expected: null },
+            { type: 'duration', value: '0', expected: "Duration must be a positive whole number" },
+            { type: 'duration', value: '-5', expected: "Duration must be a positive whole number" },
+            { type: 'duration', value: 'abc', expected: "Duration must be a number" },
+            { type: 'duration', value: '1500', expected: null },
+            
+            //Date validation
+            { type: 'dueDate', value: '2025-12-25', expected: null },
+            { type: 'dueDate', value: '2025-13-32', expected: "Due must be in YYYY-MM-DD format" },
+            { type: 'dueDate', value: '2024-01-01', expected: "Due date cant be in the past" },
+            { type: 'dueDate', value: 'invalid-date', expected: "Due must be in YYYY-MM-DD format" },
+
+            //Tag validation
+            { type: 'tag', value: 'Academic', expected: null },
+            { type: 'tag', value: 'Social Event', expected: null},
+            { type: 'tag', value: 'Study-Group', expected: null },
+            { type: 'tag', value: 'Invalid123', expected: "Tag can only contain letters, spaces and hyphens" },
+            { type: 'tag', value: 'A', expected: "Tag must be atleast 2 characters long" },
+            { type: 'tag', value: 'Tag is too long for validation', expected: "Tag cant exceed 20 characters" },
+
+            //Regex matching tests
+            { type: 'regex', pattern: 'test', text: 'This is a test', expected: 'This is a <mark>test</mark>' },
+            { type: 'regex', pattern: '\\d+', text: 'Task 123 completed', expected:'Task <mark>123</mark> completed' },
+            { type: 'regex', pattern: '[' , text: 'Test text', expected: null, shouldError: true },
+        ];
+
+
+        const results = document.getElementById('test-results');
+        let passed = 0;
+        let total = 0;
+
+        //Looping through each test and run validation or regex
+
+        tests.forEach(test => {
+            total++;
+            let result, isPass;
+
+            if (test.type === 'regex') {
+                //Try to compile regex safely
+                const regex = safeRegexCompile(test.pattern);
+                if (test.shouldError) {
+                    //We expect this regex to fail
+                    isPass = regex === null;
+                    result = regex === null ? 'Handled error correctly' : 'should have returned null for invalid regex';
+                } else {
+                    //If regex is valid, test it on the text
+                    result = highlightMatches(test.text, regex);
+                    isPass = result === test.expected;
+                }
+            } else {
+                //For standard validators (title, tag, etc)
+                result = validators[test.type](test.value);
+                isPass = result === test.expected;
+            }
+
+            if (isPass) passed++;
+
+            //Create a visual output for each test
+            const testDiv =document.createElement('div');
+            testDiv.className = `test ${isPass ? 'pass' : 'fail'}`;
+
+            testDiv.innerHTML= `
+                <div class="test-title">${test.type}("${test.value}")</div>
+                <div class="test-result"><strong>Expected:</strong> ${test.expected}</div>
+                <div class="test-result"><strong>Got:</strong> ${result}</div>
+                <div class="test-result"><strong>Status:</strong> ${isPass ? '✅ PASS' : '❌ FAIL'} </div>
+                `;
+
+                results.appendChild(testDiv);
+        });
+
+        //Show overall summary
+        const summary = document.createElement('div');
+        summary.innerHTML = `<h2>Summary: ${passed}/${total} tests passed</h2>`;
+        results.appendChild(summary);
+
+        //Manual form data validation test
+        const formTestData = {
+            title: 'Study Session',
+            dueDate: '2025-12-01',
+            duration: '90',
+            tag: 'Academic'
+        };
+
+        const formErrors = validateForm(formTestData); //Validate all fields at once
+        const formTestDiv = document.createElement('div');
+        formTestDiv.className = `test ${Object.keys(formErrors).length === 0 ? 'pass' : 'fail'} `;
+        formTestDiv.innerHTML = `
+            <div class="test-title">Form Validation Test</div>
+            <div class="test-result"><strong>Data:</strong> ${JSON.stringify(formTestData)}</div>
+            <div class="test-result"><strong>Errors:</strong> ${Object.keys(formErrors).length === 0 ? 'None' : JSON.stringify(formErrors)}</div>
+            <div class="test-result"><strong>Status:</strong> ${Object.keys(formErrors).length === 0 ? '✅ PASS' : '❌ FAIL'}</div>
+
+        `;
+        results.appendChild(formTestDiv);
+    </script>
+</body>
+</html>    
