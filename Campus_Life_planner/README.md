@@ -36,3 +36,24 @@ YYYY-MM-DD format
 -Visibl focus indicators
 -Screen reader announcements
 
+##FILE STRUCTURE
+Campus_Life_planner/
+|___Index.html #Main application
+|___css_styles/
+| |__main.css # Core styles
+| |
+| |__responsive.css #Media queries
+| |
+| |__animations.css#Transitions & animations
+|____java_scripts/  
+| |__main.js #Application entry point
+| |
+| |__task-manager.js #task operations
+| |
+| |__data-manager.js # localStorage management
+|
+|
+|
+|
+|
+|
