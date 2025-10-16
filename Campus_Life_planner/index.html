@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Planner</title>
+    <link rel="stylesheet" href="css_styles/main.css">
+    <link rel="stylesheet" href="css_styles/responsive.css">
+    <link rel="stylesheet" href="css_styles/animations.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header role="banner">
+        <h1> 🙌 Welcome to your Campus life planner 👩‍🎓👨‍🎓</h1>
+        <nav role="navigation" aria-label="Main navigation">
+            <ul>
+                <li><a href="#dashboard">🧮 Your Dashboard</a></li>
+                <li><a href="#tasks">📝 Your Tasks</a></li>
+                <li><a href="#add-task">➕ Add your tasks</a></li>
+                <li><a href="#settings">🛠 Settings</a></li>
+                <li><a href="#about">ℹ️ About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main id="main-content" role="main">
+        <!--Dashboard Section-->
+        <section id="dashboard" aria-labelledby="dashboard-heading">
+            <h2 id="dashboard-heading">Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3> Your Total Tasks</h3>
+                    <div class="stat-value" id="stats-total">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Time Planned</h3>
+                    <div class="stat-value" id="stats-duration">0 min</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Most Common Tag</h3>
+                    <div class="stat-value" id="stats-top-tag">None</div>
+                </div>
+            </div>
+
+                <div class="target-section">
+                    <h3>🎯Weekly Time target</h3>
+                    <div class="target-controls">
+                        <label for="weekly-target">How many hours do you want to focus this week?</label>
+                        <input type="number" id="weekly-target" min="1" value="20">
+                        <button id="update-target">Update</button>
+                    </div>    
+                </div>
+
+            <div id="target-status" aria-live="polite"></div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div> 
+                </div>      
+            </div>
+            <div class="progress-text" id="progress-text">0/20 hours</div>
+        
+        </section>
+
+    <!--Tasks Section-->
+    <section id="tasks" aria-labelledby="tasks-heading">
+        <h2 id="tasks-heading">📅 What's on your agenda today?</h2>
+
+        <div class="controls">
+            <div class="search-container">
+                <label for="search-input" class="sr-only">Search tasks</label>
+                <input type="text" id="search-input" placeholder="🔍Search tasks (supports regex)" aria-describedby="search-help">
+                <small id="search-help" class="help-text">Tip: You can use regex if you're feeling fancy! 😉</small>
+            </div>
+
+            <div class="sort-container">
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select">
+                    <option value="dueDate">Due Date</option>
+                    <option value="title">Title</option>
+                    <option value="duration">Duration</option>
+                    <option value="tag">Tag</option>
+                </select>
+                <button id="sort-direction" aria-label="Sort direction">☝</button>
+            </div>    
+        
+        </div>
+        <div id="tasks-container" class="tasks-container"> 
+                <!--Tasks will be Delivered here-->
+        </div>
+    </section>
+        <!--Add Task Section-->
+        <section id="add-task" aria-labelledby="add-task-heading">
+            <h2 id="add-task-heading">➕ Plan Something New (Task/Event)</h2>
+            <form id="task-form" novalidate>
+                <div class="form-group">
+                    <label for="title">Title*</label>
+                    <input type="text" id="title" name="title" required aria-describedby="title-help">
+                    <small id="title-help" class="help-text">Give your task a clear and short name (no leading/trailing spaces)</small>
+                    <div class="error-message" id="title-error" aria-live="polite"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dueDate">Due Date*</label>
+                    <input type="date" id="dueDate" name="dueDate" required>
+                    <div class="error-message" id="dueDate-error" aria-live="polite"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Duration (minutes)*</label>
+                    <input type="number" id="duration" name="duration" min="1" required>
+                    <div class="error-message" id="duration-error" aria-live="polite"></div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="tag">Tag*</label>
+                    <input type="text" id="tag" name="tag" required aria-describedby="tag-help">
+                    <small id="tag-help" class="help-text">Category like Academic, Social, etc.</small>
+                    <div class="error-message" id="tag-error" aria-live="polite"></div>
+                </div>
+
+                <button type="submit" id="submit-btn">✔ Add it to my plan</button>
+            </form>
+        </section>
+
+        <!--Settings Section-->
+        <section id="settings" aria-labelledby="settings-heading">
+            <h2 id="settings-heading">Settings</h2>
+            <div class="settings-grid">
+                <div class="setting-group">
+                    <h3>📊 Data Management</h3>
+                    <div class="button-group">
+                        <button id="export-data" class="btn-secondary">🛳Export Data</button>
+                        <button id="import-data" class="btn-secondary">🚢Import Data</button>
+                        <button id="clear-data" class="btn-danger">🚩Clear All Data (Be careful!)</button>
+                    </div>
+
+                    <div class="import-section">
+                        <label for="import-file">Import from JSON file:</label>
+                        <input type="file" id="import-file" accept=".json">
+                        <div id="import-status" aria-live="polite"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--About Section-->
+        <section id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading">About Campus Life Planner</h2>
+            <p>This planner is built to help you stay on top of your campus life, events with time tracking and search functionality.</p>
+            <div class="contact-info">
+                <p><strong>Contact:</strong>yourname@example.com</p>
+                <p><strong>Github:</strong>https://github.com/yourusername</p>
+            </div>
+        </section>
+    </main>
+    <footer role="contentinfo">
+        <p>&copy;2025 Campus Life Planner - Built with 🎓🧠 and ❤ Enjoy!!</p>
+    </footer>
+
+    <script type="module" src="java_scripts/main.js"></script>
+</body>
+</html>
