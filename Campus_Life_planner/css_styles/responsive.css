@@ -1,0 +1,63 @@
+/* Mobile First -Base styles are in main.css */
+
+/* Tablet*/
+
+@media (min-width: 768px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        margin-bottom: 0;
+    }
+
+    nav ul {
+        gap: 1.5rem;
+    }
+
+    .tasks-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+ }
+
+    .task-details {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .controls {
+        flex-wrap: nowrap;
+    }
+
+    .search-container {
+        flex: 1;
+    }
+
+}
+
+/*Desktop */
+@media (min-width: 1024px) {
+    main {
+        padding: 2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .settings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .task-details {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* Large Desktop */
+
+@media (min-width: 1200px) {
+    .tasks-container {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+}
