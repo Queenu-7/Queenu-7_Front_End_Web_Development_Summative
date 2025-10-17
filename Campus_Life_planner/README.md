@@ -63,3 +63,21 @@ Campus_Life_planner/
 | |____images (Empty)
 |______sample-data.json # sample tasks for testing
 |_________test.html #Regex validation tests
+
+##Running the Application
+1. Open `index.html` in a web browser
+2. The app will load with sample data if no existing if no existing data is found
+3. Use the navigation to access different sections
+
+## Testing
+
+Open `tests.html` to run regex validation tests and see examples of valid/invalid inputs.
+
+##Browser support
+
+-Chrome
+-Firefox
+-Safari
+-Edge
+
+
