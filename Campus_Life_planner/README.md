@@ -51,9 +51,15 @@ Campus_Life_planner/
 | |__task-manager.js #task operations
 | |
 | |__data-manager.js # localStorage management
-|
-|
-|
-|
-|
-|
+| |
+| |__user-interface.js # Dom manipulation
+| |
+| |__ validators.js #Form validation
+| |
+| |___search.js #Regex search functionality
+| |
+| |___helpers.js # utility functions
+|_____assets/
+| |____images (Empty)
+|______sample-data.json # sample tasks for testing
+|_________test.html #Regex validation tests
