@@ -80,4 +80,12 @@ Open `tests.html` to run regex validation tests and see examples of valid/invali
 -Safari
 -Edge
 
+PS: The assests file is empty as there's no need for images or icons
+
+## 3 minute video Demo link on how to use my website 
+
+https://youtu.be/2Le9R0l6_O4
+
+
+
 
